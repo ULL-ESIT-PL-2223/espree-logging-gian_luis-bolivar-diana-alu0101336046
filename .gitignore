@@ -4,3 +4,6 @@ node_modules
 alus
 escodegen/
 output.js
+
+# Yarn Integrity file
+yarn.lock
