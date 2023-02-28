@@ -1,10 +1,21 @@
-import * as escodegen from "escodegen";
-import * as espree from "espree";
-import * as estraverse from "estraverse";
-import * as fs from "fs/promises";
+import * as escodegen from 'escodegen';
+import * as espree from 'espree';
+import * as estraverse from 'estraverse';
+import * as fs from 'fs/promises';
 
+/**
+ * @description Transpile a js file, adding logging statements to the
+ *   beginning of each function.
+ *
+ * @param {string} inputFile The file where the input is stored.
+ * @param {string} outputFile The file to output the new code generated.
+ * @returns {string} The JS code generated.
+ */
 export async function transpile(inputFile, outputFile) {
-  // Fill in the code here
+  const input = await fs.readFile(inputFile, 'utf-8');
+  const output = addLogging(input);
+  if (outputFile) await fs.writeFile(outputFile, output);
+  return output;
 }
 
 /**
