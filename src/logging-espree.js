@@ -30,7 +30,8 @@ function addLogging(code) {
  */
 function addBeforeCode(node) {
   const name = node.id?.name ?? '<anonymous function>';
-  const beforeCode = `console.log('Entering ${name}()');`; // :) <- Estela made this
+  const params = node.params.map((p) => `\${ ${p.name} }`).join(', ');
+  const beforeCode = `console.log('Entering ${name}(${params})');`; // :) <- Estela made this
   const beforeNodes = espree.parse(beforeCode).body;
   node.body.body = [ ...beforeNodes, ...node.body.body ];
 }
