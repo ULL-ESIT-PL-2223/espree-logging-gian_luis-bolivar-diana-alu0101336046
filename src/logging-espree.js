@@ -25,7 +25,7 @@ export async function transpile(inputFile, outputFile) {
  * @returns {string} The JavaScript code with logging statements added
  */
 function addLogging(code) {
-  const ast = espree.parse(code, { ecmaVersion: 2020,  loc: true });
+  const ast = espree.parse(code, { ecmaVersion: 2020, loc: true });
   estraverse.traverse(ast, {
     enter: function(node, _) {
       if (/\w*Function\w*/.test(node.type)) addBeforeCode(node);
@@ -41,7 +41,11 @@ function addLogging(code) {
  */
 function addBeforeCode(node) {
   const name = node.id?.name ?? '<anonymous function>';
-  const params = node.params.map((p) => `\${ ${p.name} }`).join(', ');
+  const params = node.params.map((p) => {
+    if (p.type === 'Identifier') return `\${ ${p.name} }`;
+    else if (p.type === 'RestElement') return `...\${ ${p.argument.name} }`;
+    else if (p.type === 'AssignmentPattern') return `\${ ${p.left.name} } = ${p.right.value}`;
+  }).join(', ');
   const { line } =  node.loc.start;
   const beforeCode = `console.log(\`Entering ${name}(${params}) at line ${line}\`);`; // :) <- Estela made this
   const beforeNodes = espree.parse(beforeCode, { ecmaVersion: 2020 }).body;
