@@ -43,7 +43,7 @@ function addBeforeCode(node) {
   const name = node.id?.name ?? '<anonymous function>';
   const params = node.params.map((p) => `\${ ${p.name} }`).join(', ');
   const { line } =  node.loc.start;
-  const beforeCode = `console.log('Entering ${name}(${params}) at line ${line}');`; // :) <- Estela made this
-  const beforeNodes = espree.parse(beforeCode).body;
+  const beforeCode = `console.log(\`Entering ${name}(${params}) at line ${line}\`);`; // :) <- Estela made this
+  const beforeNodes = espree.parse(beforeCode, { ecmaVersion: 2020 }).body;
   node.body.body = [ ...beforeNodes, ...node.body.body ];
 }
