@@ -43,8 +43,8 @@ function addBeforeCode(node) {
   const name = node.id?.name ?? '<anonymous function>';
   const params = node.params.map((p) => {
     if (p.type === 'Identifier') return `\${ ${p.name} }`;
-    else if (p.type === 'RestElement') return `...\${ ${p.argument.name} }`;
-    else if (p.type === 'AssignmentPattern') return `\${ ${p.left.name} } = ${p.right.value}`;
+    if (p.type === 'RestElement') return `...\${ ${p.argument.name} }`;
+    return `\${ ${p.left.name} } = ${p.right.value}`;
   }).join(', ');
   const { line } =  node.loc.start;
   const beforeCode = `console.log(\`Entering ${name}(${params}) at line ${line}\`);`; // :) <- Estela made this
