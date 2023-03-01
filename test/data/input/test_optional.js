@@ -3,4 +3,4 @@ const opt = function (x = 1) {
 };
 
 opt();
-opt(1);
+opt(2);

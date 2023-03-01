@@ -20,17 +20,22 @@ describe('Transpile function', () => {
     });
   });
 
-  xdescribe('Should creates an JS file with the JS code', () => {
+  describe('Should creates an JS file with the JS code', () => {
     it.each([
       { input: 'test1.js', output: 'logged1.txt' },
       { input: 'test2.js', output: 'logged2.txt' },
       { input: 'test3.js', output: 'logged3.txt' },
-      { input: 'test_rest.js', output: 'logged_rest.js' },
-      { input: 'test_optional.js', output: 'logged_opt.js' },
+      { input: 'test_rest.js', output: 'logged_rest.txt' },
+      { input: 'test_optional.js', output: 'logged_opt.txt' },
     ])('The file $input (when piped with node) should log $output', async ({ input, output }) => {
-      const expected = await fs.readFile(addTestPat(`logs/${output}`), 'utf-8');
+      const logs = [];
+      const OLD_LOG = console.log;
+      console.log = (...msg) => logs.push(...msg);
+      const expected = await fs.readFile(addTestPath(`logs/${output}`), 'utf-8');
       const actual = await transpile(addTestPath(`input/${input}`));
-      expect(eval(actual)).toEqual(expected);
+      eval(actual);
+      console.log = OLD_LOG;
+      expect(removeSpaces(logs.join(''))).toEqual(removeSpaces(expected));
     });
   });
 
