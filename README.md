@@ -1,8 +1,11 @@
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-f4981d0f882b2a3f0472912d15f9806d57e124e0fc890972558857b51b24a6f9.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=10279653)
 # Práctica Espree logging
+  - Autor: Gian Luis Bolivar Diana
+  - Email: _gian.diana.28@ull.edu.es_
 
 ## Resumen de lo aprendido
 
+A lo largo del desarrollo de la práctica, hemos obtenido los conocimientos necesarios para recorrer AST generados
 ...
 
 ## Indicar los valores de los argumentos
@@ -10,7 +13,7 @@
 Se ha modificado el código de `logging-espree.js` para que el log también indique los valores de los argumentos que se pasaron a la función. 
 Ejemplo:
 
-```javascript
+```js
 function foo(a, b) {
   var x = 'blah';
   var y = (function (z) {
@@ -20,7 +23,7 @@ function foo(a, b) {
 foo(1, 'wut', 3);
 ```
 
-```javascript
+```js
 function foo(a, b) {
     console.log(`Entering foo(${ a }, ${ b })`);
     var x = 'blah';
