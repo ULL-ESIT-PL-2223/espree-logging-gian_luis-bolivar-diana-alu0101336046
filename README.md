@@ -3,13 +3,6 @@
   - Autor: Gian Luis Bolivar Diana
   - Email: _gian.diana.28@ull.edu.es_
 
-```js
-let estela = 'love';
-let gian = `Estela has inside a lot of ${estela}`;
-
-console.log(gian);
-```
-
 ## Resumen de lo aprendido
 
 A lo largo del desarrollo de la práctica, hemos obtenido los conocimientos necesarios para recorrer AST generados:
@@ -112,8 +105,32 @@ De manera adicional, implementamos la capacidad de reconocer parámetros opciona
 
 ## CLI con [Commander.js](https://www.npmjs.com/package/commander)
 
-TODO
-...
+Con el método .version establecemos la versión del programa (generalmente extraída de package.json).
+
+Para agregar un argumento requerido, llamamos al método .argument. El primer parámetro es el nombre del argumento y el segundo es una breve descripción del uso de este argumento.
+
+Opcionalmente, podemos especificar el nombre del archivo de salida, para ello llamamos al método .option. De manera idéntica a antes, primero debemos proporcionar cómo llamar al argumento (podemos especificar diferentes formas de llamarlo utilizando la coma en la cadena como separador) y una descripción del argumento.
+
+Finalmente, utilizando el método .action, indicamos a nuestro programa cómo proceder si se llama correctamente.
+
+```js
+
+import { program } from 'commander';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const { version } = require('../package.json');
+import { transpile } from '../src/logging-espree.js';
+
+program
+  .version(version)
+  .argument('<filename>', 'file with the original code')
+  .option('-o, --output <filename>', 'file in which to write the output')
+  .action((filename, options) => {
+    transpile(filename, options.output);
+  });
+
+program.parse(process.argv);
+```
 
 ## Reto 1: Soportar funciones flecha
 
