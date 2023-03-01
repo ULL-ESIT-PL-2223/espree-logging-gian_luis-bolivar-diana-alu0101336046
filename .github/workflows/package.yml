@@ -1,7 +1,7 @@
 name: Package upload
 on: # when this action should be triggered?
   push:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   # This workflow contains a single job called "build"
