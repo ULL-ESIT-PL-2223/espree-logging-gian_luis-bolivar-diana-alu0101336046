@@ -1,0 +1,15 @@
+name: Package upload
+  on: # when this action should be triggered?
+    push:
+      branches: [ master ]
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+        - name: Setup npmrc
+          run: echo "//npm.pkg.github.com/:_authToken=${{secrets.NPM_AUTH_TOKEN}}" > .npmrc
+
+        - name: Install Dependencies
+          run: npm ci
