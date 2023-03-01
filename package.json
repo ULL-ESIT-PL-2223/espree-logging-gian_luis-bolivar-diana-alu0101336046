@@ -1,5 +1,5 @@
 {
-    "name": "@alu0101336046/espree-logging-solution",
+    "name": "@gianluisdiana/espree-logging-solution",
     "author": {
         "name": "Gian Luis Bolivar Diana",
         "email": "gian.diana.28@ull.edu.es"
@@ -9,6 +9,10 @@
     "type": "module",
     "bin": {
         "funlog": "bin/log.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ULL-ESIT-PL-2223/espree-logging-gian_luis-bolivar-diana-alu0101336046"
     },
     "license": "MIT",
     "scripts": {
