@@ -20,7 +20,7 @@ describe('Transpile function', () => {
     });
   });
 
-  describe('Should creates an JS file with the JS code', () => {
+  describe('Should log the name, parameters and line of the function', () => {
     it.each([
       { input: 'test1.js', output: 'logged1.txt' },
       { input: 'test2.js', output: 'logged2.txt' },
